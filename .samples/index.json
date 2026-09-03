@@ -1,6 +1,21 @@
 {
-  "count": 5,
+  "count": 6,
   "samples": [
+    {
+      "name": "Hello World API",
+      "displayName": "Hello World API",
+      "description": "A sample API proxy that returns a hello world greeting.",
+      "componentType": "API-proxy",
+      "repositoryUrl": "https://github.com/wso2/bijira-samples/",
+      "componentPath": "/hello-world-api",
+      "thumbnailPath": "https://raw.githubusercontent.com/wso2/bijira-samples/refs/heads/main/.samples/icons/hello-world.svg",
+      "documentationPath": "/hello-world-api/readme.md",
+      "buildPack": "none",
+      "tags": [
+        "API Proxy",
+        "HTTP"
+      ]
+    },
     {
       "name": "Reading List API",
       "displayName": "Reading List API",

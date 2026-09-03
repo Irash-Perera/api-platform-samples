@@ -1,0 +1,25 @@
+openapi: 3.0.1
+info:
+  title: Hello World API
+  description: This is a sample proxy that returns a hello world greeting.
+  contact: {}
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /hello:
+    get:
+      tags:
+        - hello
+      summary: Get a hello world greeting
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hello, World!
