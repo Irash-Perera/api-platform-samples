@@ -1,0 +1,54 @@
+openapi: 3.0.3
+info:
+  title: Trip Planning Agent
+  version: 1.0.0
+
+paths:
+  /.well-known/agent-card.json:
+    get:
+      summary: Agent Card discovery document
+      responses:
+        '200':
+          description: The Agent Card
+          content:
+            application/json:
+              schema:
+                type: object
+  /rpc:
+    post:
+      summary: A2A JSON-RPC transport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: JSON-RPC result
+          content:
+            application/json:
+              schema:
+                type: object
+  /rest/{operation}:
+    post:
+      summary: A2A HTTP+JSON transport
+      parameters:
+        - name: operation
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              schema:
+                type: object
