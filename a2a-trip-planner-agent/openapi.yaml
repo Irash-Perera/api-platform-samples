@@ -16,7 +16,7 @@ paths:
                 type: object
   /rpc:
     post:
-      summary: A2A JSON-RPC transport
+      summary: A2A JSON-RPC transport, every operation
       requestBody:
         required: true
         content:
@@ -30,15 +30,12 @@ paths:
             application/json:
               schema:
                 type: object
-  /rest/{operation}:
+
+  # The HTTP+JSON binding gives each operation its own route, so Choreo needs
+  # each one declared; a single wildcard would not match the GET.
+  /rest/message:send:
     post:
-      summary: A2A HTTP+JSON transport
-      parameters:
-        - name: operation
-          in: path
-          required: true
-          schema:
-            type: string
+      summary: SendMessage
       requestBody:
         required: true
         content:
@@ -47,7 +44,64 @@ paths:
               type: object
       responses:
         '200':
-          description: Operation result
+          description: The task
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /rest/message:stream:
+    post:
+      summary: SendStreamingMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: A stream of task events
+          content:
+            text/event-stream:
+              schema:
+                type: string
+
+  /rest/tasks/{id}:
+    get:
+      summary: GetTask
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The task
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /rest/tasks/{id}:cancel:
+    post:
+      summary: CancelTask
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The cancelled task
           content:
             application/json:
               schema:
